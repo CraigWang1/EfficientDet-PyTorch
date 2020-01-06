@@ -6,6 +6,7 @@ import copy
 import pdb
 import time
 import argparse
+import efficientdet
 
 import sys
 import cv2
@@ -43,8 +44,13 @@ def main(args=None):
 
 	sampler_val = AspectRatioBasedSampler(dataset_val, batch_size=1, drop_last=False)
 	dataloader_val = DataLoader(dataset_val, num_workers=1, collate_fn=collater, batch_sampler=sampler_val)
-
-	retinanet = torch.load(parser.model)
+	
+	#load in the model
+	device = torch.device('gpu')
+	retinanet = efficientdet.efficientdet(num_classes=dataset_train.num_classes(), pretrained=True, phi=parser.scaling_compound)
+	retinanet.load_state_dict(torch.load(parser.model, map_location=device))
+	
+	#retinanet = torch.load(parser.model)
 
 	use_gpu = True
 
