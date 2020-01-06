@@ -50,7 +50,7 @@ def main(args=None):
 	dataloader_val = DataLoader(dataset_val, num_workers=1, collate_fn=collater, batch_sampler=sampler_val)
 	
 	#load in the model
-	device = torch.device('gpu')
+	device = torch.device('cpu')
 	retinanet = efficientdet.efficientdet(num_classes=dataset_val.num_classes(), pretrained=True, phi=parser.scaling_compound)
 	retinanet.load_state_dict(torch.load(parser.model, map_location=device))
 	
