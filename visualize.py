@@ -27,6 +27,7 @@ def main(args=None):
 	parser = argparse.ArgumentParser(description='Simple training script for training a RetinaNet network.')
 
 	parser.add_argument('--dataset', help='Dataset type, must be one of csv or coco.')
+	parser.add_argument('--scaling-compound', help='EfficientDet scaling compound phi.', type=int, default=0)
 	parser.add_argument('--coco_path', help='Path to COCO directory')
 	parser.add_argument('--csv_train', help='Path to file containing training annotations (see readme)')
 	parser.add_argument('--csv_classes', help='Path to file containing class list (see readme)')
@@ -36,10 +37,12 @@ def main(args=None):
 
 	parser = parser.parse_args(args)
 
-	if parser.dataset == 'coco':
-		dataset_val = CocoDataset(parser.coco_path, set_name='val2017', transform=transforms.Compose([Normalizer(), Resizer()]))
+	img_size = parser.scaling_compound * 128 + 512
+	
+	if parser.dataset == 'coco':  #change this later, match it up with train.py
+		dataset_val = CocoDataset(parser.coco_path, set_name='val2017', transform=transforms.Compose([Normalizer(), Resizer(img_size=img_size)]))
 	elif parser.dataset == 'csv':
-		dataset_val = CSVDataset(train_file=parser.csv_train, class_list=parser.csv_classes, transform=transforms.Compose([Normalizer(), Resizer()]))
+		dataset_val = CSVDataset(train_file=parser.csv_val, class_list=parser.csv_classes, transform=transforms.Compose([Normalizer(), Resizer(img_size=img_size)]))
 	else:
 		raise ValueError('Dataset type not understood (must be csv or coco), exiting.')
 
