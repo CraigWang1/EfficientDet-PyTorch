@@ -8,7 +8,7 @@ import time
 import argparse
 import efficientdet
 import matplotlib
-import matplotlibt.pyplot as plt
+import matplotlib.pyplot as plt
 
 import sys
 import cv2
