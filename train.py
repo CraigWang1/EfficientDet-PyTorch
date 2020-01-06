@@ -190,12 +190,12 @@ def main(args=None):
 
         
         scheduler.step(np.mean(epoch_loss))    
-
-        torch.save(model, '{}_model_{}.pt'.format(parser.dataset, epoch_num))
+        
+        torch.save(model.module.state_dict(), '{}_model_{}.pt'.format(parser.dataset, epoch_num)) #save the model
 
     model.eval()
-
-    torch.save(model, 'model_final.pt'.format(epoch_num))
+    
+    torch.save(model.module.state_dict(), 'model_final.pt'.format(epoch_num)) #save the model
 
 if __name__ == '__main__':
     main()
