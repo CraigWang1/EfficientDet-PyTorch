@@ -47,7 +47,7 @@ def main(args=None):
 	
 	#load in the model
 	device = torch.device('gpu')
-	retinanet = efficientdet.efficientdet(num_classes=dataset_train.num_classes(), pretrained=True, phi=parser.scaling_compound)
+	retinanet = efficientdet.efficientdet(num_classes=dataset_val.num_classes(), pretrained=True, phi=parser.scaling_compound)
 	retinanet.load_state_dict(torch.load(parser.model, map_location=device))
 	
 	#retinanet = torch.load(parser.model)
