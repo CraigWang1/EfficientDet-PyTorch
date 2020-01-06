@@ -7,6 +7,8 @@ import pdb
 import time
 import argparse
 import efficientdet
+import matplotlib
+import matplotlib.pyplot as plt  #use matplotlib to show images, make it compatible with google colab (gc)
 
 import sys
 import cv2
@@ -99,8 +101,8 @@ def main(args=None):
 				cv2.rectangle(img, (x1, y1), (x2, y2), color=(0, 0, 255), thickness=2)
 				print(label_name)
 
-			cv2.imshow('img', img)
-			cv2.waitKey(0)
+			plt.imshow(img, cmap='gray')
+			plt.show()
 
 
 
