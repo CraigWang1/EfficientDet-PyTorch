@@ -32,7 +32,6 @@ from ptflops import get_model_complexity_info
 #assert torch.__version__.split('.')[1] == '4'
 
 print('CUDA available: {}'.format(torch.cuda.is_available()))
-model.module_model_
 
 
 def freeze_layer(layer):
@@ -196,7 +195,7 @@ def main(args=None):
 
     model.eval()
 
-    torch.save(model, 'model_final.pt'.format(epoch_num))
+    torch.save(model.module.model, 'model_final.pt'.format(epoch_num))
 
 if __name__ == '__main__':
     main()
