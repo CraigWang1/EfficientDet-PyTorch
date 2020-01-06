@@ -192,7 +192,7 @@ def main(args=None):
         
         scheduler.step(np.mean(epoch_loss))    
 
-        torch.save(model.module.module.module_model_, '{}_model_{}.pt'.format(parser.dataset, epoch_num))
+        torch.save(model.module.model_, '{}_model_{}.pt'.format(parser.dataset, epoch_num))
 
     model.eval()
 
