@@ -148,7 +148,11 @@ def main(args=None):
         pbar = tqdm(enumerate(dataloader_train), total=len(dataloader_train))
         for iter_num, data in pbar:
             optimizer.zero_grad()
-
+            
+            print('\n\n\n\nbruh\n\n\n\n\n\n') #testing what the input is, remove later
+            print('input:', data['img'].cuda().float())
+            time.sleep(20)
+            
             classification_loss, regression_loss = model([data['img'].cuda().float(), data['annot']])
 
             classification_loss = classification_loss.mean()
