@@ -195,7 +195,7 @@ def main(args=None):
 
     model.eval()
     
-    torch.save(model.module.state_dict(), 'model_final.pt'.format(epoch_num)) #save the model
+    torch.save(model.module.state_dict(), 'model_final.pt') #save the model
 
 if __name__ == '__main__':
     main()
